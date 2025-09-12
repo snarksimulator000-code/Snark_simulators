@@ -1,0 +1,108 @@
+#include <iostream>
+#include <string>
+#include <limits>
+
+// Bugs: Unlimited user input. Anything other than numbers caused an infinite loop
+
+int snarkcounter () {
+    static int counter = 0;
+    counter++;
+    return counter;
+}
+
+std::string Are_you_proud () {
+    std::string ValidYes[] = {"yes", "YES", "Y", "y", "Yes"};
+    std::string ValidNo[]  = {"no", "NO", "N", "n", "No"};
+    std::string answer;
+    bool valid = false;
+    int counter;
+    
+    std::cout << "Are you proud of yourself?" << std::endl;
+   
+    do {
+        std::cin >> answer;
+        counter = snarkcounter();
+        // check yes answers
+        for (int i = 0; i < 5; i++) {
+            if (answer == ValidYes[i] || answer == ValidNo[i]) {
+                valid = true;
+                std::cout << "Isn't it good when you listen?" << '\n';
+                break;
+            }
+        }
+
+        if (!valid) {
+            std::cerr << "USER CANNOT FOLLOW INSTRUCTIONS. Program is fainting" << '\n';
+        }
+
+    } while (!valid);
+
+    return answer;
+}
+
+int First_Number () {
+int first_num = Get_Valid_Number();
+
+ do {
+       std::cout << "Choose a number greater than 0, sucker: " << std::endl;
+       std::cin >> first_num;
+    
+        if (first_num > 100){
+         std::cout << "You can actually count that high... shocking " << std::endl;
+         
+        } else if (first_num == 13){
+            std::cout << "lucky number" << std::endl;
+            
+        } else if (first_num == 0){
+            std::cout << "Nope. Not higher than 0 genius. Try again" << std::endl;
+        
+        } else if (first_num == 50) {
+        std::cout << "Maybe there's hope for you :) " << '\n';
+
+        
+        } else {
+            std::string answer = Are_you_proud ();
+        
+        }
+        
+        } while (first_num <= 0); 
+    
+        return first_num;
+}
+
+int Second_Number () {
+    int second_num {};
+    std::cout << "Not done. Pick again: " << std::endl;
+    
+    do {
+        second_num = Get_Valid_Number();
+        
+         if (second_num > 150){
+         std::cout << "Ok so you can count. You are not special" << std::endl;
+         
+        } else if (second_num < 0){
+            std::cout << "I doubt you're smart enough to deal with negatives, stick to positive numbers" << std::endl;
+            
+        } else {
+            std::cout << "Well done. You've actually added two numbers up together" << std::endl;
+        }
+    
+        
+    } while (second_num < 0);
+    
+    return second_num;
+} 
+
+int main(){
+    // Defining variables
+    
+    int first = First_Number();
+    int second = Second_Number();
+    
+    int sum = first + second;
+    std::cout << "Result = " << sum << std::endl;
+    std::cout << "Snarkcounter report: " << snarkcounter() - 2 << ". Are you happy? " << '\n';
+    
+    return 0;
+
+}
