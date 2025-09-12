@@ -1,0 +1,91 @@
+#include <iostream>
+#include <string>
+#include <limits>
+
+// User input limited to numbers. Anything else is cleared from the buffer
+// Next update: Random snark generator function
+
+int snarkcounter () {
+    static int counter = 0;
+    counter++;
+    return counter;
+}
+
+std::string Are_you_proud () {
+    std::string ValidYes[] = {"yes", "YES", "Y", "y", "Yes"};
+    std::string ValidNo[]  = {"no", "NO", "N", "n", "No"};
+    std::string answer;
+    bool valid = false;
+    int counter;
+    
+    std::cout << "Are you proud of yourself?" << std::endl;
+   
+    do {
+        std::cin >> answer;
+        counter = snarkcounter();
+        // check yes answers
+        for (int i = 0; i < 5; i++) {
+            if (answer == ValidYes[i] || answer == ValidNo[i]) {
+                valid = true;
+                std::cout << "Isn't it good when you listen?" << '\n';
+                break;
+            }
+        }
+
+        if (!valid) {
+            std::cerr << "USER CANNOT FOLLOW INSTRUCTIONS. Program is fainting" << '\n';
+        }
+
+    } while (!valid);
+
+    return answer;
+}
+
+int Get_Valid_Number (){
+    
+    int number;
+    std::string answer;
+    std::cout << "Pick a number greater than 0, genius " << '\n';
+        
+    while(true){
+        int counter = snarkcounter();
+        if (std::cin >> number) {
+     
+            if (number > 100){
+            std::cout << "You can actually count that high... shocking " << std::endl;
+         
+            } else if (number == 13){
+            std::cout << "lucky number" << std::endl;
+            
+            } else if (number == 0){
+            std::cout << "Nope. Not higher than 0 genius. Try again" << std::endl;
+        
+            } else if (number == 50) {
+            std::cout << "Maybe there's hope for you :) " << '\n';
+            }
+             
+             break;
+            
+        } else {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Though you could break me? " << '\n';
+            }
+        }
+    
+    return number;
+}
+
+int main(){
+    // Defining variables
+    int first = Get_Valid_Number();
+    std::string Got_A_Question = Are_you_proud();
+    int second = Get_Valid_Number();
+    
+    int sum = first + second;
+    std::cout << "Result = " << sum << std::endl;
+    std::cout << "Snarkcounter report: " << snarkcounter() - 2 << ". Are you happy? " << '\n';
+    
+    return 0;
+
+}
