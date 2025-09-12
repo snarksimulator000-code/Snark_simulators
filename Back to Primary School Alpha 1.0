@@ -1,0 +1,30 @@
+#include <iostream>
+
+int number_adding_machine(int num1, int num2){
+
+int sum = num1 + num2;
+
+    return sum;
+}
+
+int main(){
+
+// Write C++ code here
+    int first_num {};
+    int second_num {};
+
+    std::cout << "Choose a number, sucker: " << std::endl;
+    std::cin >> first_num;
+    
+    std::cout << "Not done. Pick again, sucker: " << std::endl;
+    std::cin >> second_num;
+
+
+    int sum {};
+    sum = number_adding_machine (first_num,second_num);
+
+    std::cout << "Result = " << sum << std::endl;
+
+    return 0;
+
+}
