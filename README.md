@@ -32,9 +32,21 @@ This is a basic program to add 2 numbers togther, using a function to keep the c
 - User input limited: Buffer cleaning prototype was integrated into the program (prevents users from entering unaccepted values, fostering a fully robust design)
 - Bug fixed: no infinite loops caused through incorrect value input
 
+## Dice Simulator Beta 1.0
+It's a dice throwing game, all roll triggering a pleasant... or unpleasant surprise
+
+### Features
+- A dice class that allows for multiplie dices being easily added through vectors in a future update
+- A simple single 6 sided dice thrown
+- An array in the main containing the message
+
+### Updates
+#### Dice Simulator Beta 1.01
+- A continue prompt has been integrated in the dice class allowing users to choose to continue or not
+
 ## How to Compile & Run
 
 ```bash
-g++ src/Back_to_Primary_School.cpp -o WingLiftSimulator
-./WingLiftSimulator
+g++ src/BacktoPrimarySchool.cpp -o BacktoPrimarySchool
+./BacktoPrimarySchool
 Copy the code and paste it onto an online compiler, for instance Programiz Online Compiler
