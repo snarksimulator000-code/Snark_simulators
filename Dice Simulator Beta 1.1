@@ -1,0 +1,68 @@
+#include <iostream>
+#include <random>
+#include <string>
+
+class dice {
+private:
+    int sides;
+    std::mt19937& gen;
+    std::uniform_int_distribution<> dist;
+
+public:
+    dice (int s, std::mt19937& engine) : 
+    sides(s), gen(engine), dist(1, s) {} // Constructor. Create the characteristics of the object
+    
+    int roll() {   
+        return dist(gen);
+    }    
+        
+    bool continue_prompt (){
+    std::string ValidYes[] = {"yes", "YES", "Y", "y", "Yes"};
+    std::string ValidNo[]  = {"no", "NO", "N", "n", "No"};
+    std::string answer;
+    bool valid = false;
+    bool Continue = false;
+
+    do {
+        std::cin >> answer;
+        // check yes answers
+        for (int i = 0; i < 5; i++) {
+            if (answer == ValidYes[i]) {
+                valid = true;
+                Continue = true;
+                break;
+            } else if (answer == ValidNo[i]){
+                valid = true;
+                Continue = false;
+                break;
+            } 
+        }
+
+        if (!valid) {
+            std::cerr << "IDIOT CANNOT FOLLOW INSTRUCTIONS. KEEP TRYING FOOL!" << '\n';
+        }
+
+    } while (!valid);
+
+    return Continue;
+    }
+};
+
+int main() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::string snark_message [6] = {
+    "Yikes. God hates you\n", "Terrible. You are not having a good day\n", "Ok, average like you\n", "You could do better no?", "Never the best", "Sky's the limit for most, for you, it's 6"};
+    
+    dice d6(6, gen);
+    bool keep_going;
+    
+    do {
+    std::cout << snark_message[d6.roll() - 1];
+    keep_going = d6.continue_prompt(); //double loop bug. Users need to provide input twice
+    
+    } while (keep_going == true);
+    
+
+    return 0;
+}
