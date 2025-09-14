@@ -1,0 +1,68 @@
+#include <iostream>
+// Adding function
+int number_adding_machine(int num1, int num2){
+    int sum = num1 + num2;
+    return sum;
+}
+
+int main(){
+    // Defining variables
+    int first_num {};
+    int second_num {};
+    char answer {}; 
+    
+   
+ do {
+       std::cout << "Choose a number greater than 0, sucker: " << std::endl;
+    std::cin >> first_num;
+    
+    if (first_num > 100){
+     std::cout << "You can actually count that high... shocking " << std::endl;
+     
+    } else if (first_num == 13){
+        std::cout << "lucky number" << std::endl;
+        
+    } else if (first_num == 0){
+        std::cout << "Nope. Not higher than 0 genius. Try again" << std::endl;
+    
+    } else {
+        std::cout << "Are you proud of yourself? Answer either y or n. So? " << std::endl;
+        std::cin >> answer;
+    }
+    } while (first_num == 0); 
+        
+         do {
+         
+         if(answer == 'y'){
+            std::cout << "You should be" << std::endl;
+            
+        } else if(answer == 'n'){
+            std::cout << "Maybe you should look into some self-respect, buddy" << std::endl;
+   
+        } else {
+       std::cerr << "Warning. Idiot who can't follow basic instructions. Program will shut down" << std::endl; // Will cause an infinite loop crashing the program
+         }
+   } while (answer != 'y' && answer != 'n');
+      
+    std::cout << "Not done. Pick again: " << std::endl;
+    std::cin >> second_num;
+    
+     if (second_num > 150){
+     std::cout << "Ok so you can count. You are not special" << std::endl;
+     
+    } else if (second_num < 0){
+        std::cout << "I doubt you're smart enough to deal with negatives, stick to positive numbers" << std::endl;
+        std::cin >> second_num;
+    
+        
+    } else {
+        std::cout << "Well done. You've actually added two numbers up together" << std::endl;
+    }
+
+    int sum {};
+    sum = number_adding_machine (first_num,second_num);
+    std::cout << "Result = " << sum << std::endl;
+
+    return 0;
+
+}
