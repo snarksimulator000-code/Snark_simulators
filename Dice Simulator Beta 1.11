@@ -1,0 +1,81 @@
+#include <iostream>
+#include <random>
+#include <string>
+
+class dice { //Blueprints for dices. Allow multiple dices to be created through vectors update
+private:
+    int sides;
+    std::mt19937& gen;
+    std::uniform_int_distribution<> dist;
+
+public:
+    dice (int s, std::mt19937& engine) : 
+    sides(s), gen(engine), dist(1, s) {} // Constructor. Create the characteristics of the dice
+    
+    int roll() {   
+        return dist(gen);
+    }    
+        
+};
+
+  bool continue_prompt (){
+    std::string ValidYes[] = {"yes", "YES", "Y", "y", "Yes"};
+    std::string ValidNo[]  = {"no", "NO", "N", "n", "No"};
+    std::string answer;
+    bool valid = false;
+    bool Continue = false;
+
+    do {
+        std::cin >> answer;
+        // check yes answers
+        for (int i = 0; i < 5; i++) {
+            if (answer == ValidYes[i]) {
+                valid = true;
+                Continue = true;
+                break;
+            } else if (answer == ValidNo[i]){
+                valid = true;
+                Continue = false;
+                break;
+            } 
+        // This had to be separated to allow either ValidNo or ValidYes to have their own conditions for Continue
+            
+        }
+
+        if (!valid) {
+            std::cerr << "IDIOT CANNOT ANSWER BASIC QUESTION. KEEP TRYING FOOL!" << '\n';
+        }
+
+    } while (!valid);
+
+    return Continue; //Return as a boolean value
+    }
+    
+std::string* snark_message(){
+    std::string* snark_canon = new std::string[6] {
+    "1. Yikes. God hates you\n", "2. Terrible. You are not having a good day\n", "3. Ok, average like you\n", "4. You could do better no?\n", "5. Never the best\n", "6. Sky's the limit for most. For you, it's 6\n"
+    };
+    return snark_canon;
+}
+
+int main() {
+    std::random_device rd; //Seed
+    std::mt19937 gen(rd()); //Engine in main. No copies from functions
+    
+    dice d6(6, gen);
+    bool roll_again; 
+    std::string* message = snark_message();
+    
+    do { //keep rolling until continue_prompt is false
+    std::cout << "You rolled a " << message[d6.roll() - 1] << '\n';
+    std::cout << "Keep rolling? \n";
+    if(continue_prompt() == false){
+        break;
+    } 
+    
+    } while (true);
+    
+    delete[] message;
+    
+    return 0;
+}
